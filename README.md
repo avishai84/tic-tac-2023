@@ -1,46 +1,63 @@
-# Getting Started with Create React App
+# Tic Tac Toe in React
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A classic Tic Tac Toe game built with React.
 
-## Available Scripts
+![Tic Tac Toe Game Screenshot](./path-to-your-screenshot.png)
 
-In the project directory, you can run:
+## Table of Contents
 
-### `npm start`
+- [Tic Tac Toe in React](#tic-tac-toe-in-react)
+  - [Table of Contents](#table-of-contents)
+  - [Introduction](#introduction)
+  - [Features](#features)
+  - [Installation](#installation)
+  - [Usage](#usage)
+  - [Contribution](#contribution)
+  - [License](#license)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Introduction
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+Tic Tac Toe is a two-player game where players take turns marking spaces in a 3×3 grid. The player who succeeds in placing three of their marks in a horizontal, vertical, or diagonal row wins the game.
 
-### `npm test`
+## Features
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **2 Player Gameplay**: Challenge your friends directly.
+- **Responsive Design**: Play on any device, desktop or mobile.
+- **Game State Preservation**: Never lose your game progress.
+- **Winning Line Highlight**: Clearly see the winning move on the board.
 
-### `npm run build`
+## Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Clone the repository:
+\```bash
+git clone https://github.com/your-username/tic-tac-toe-react.git
+\```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+2. Navigate into the project directory:
+\```bash
+cd tic-tac-toe-react
+\```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+3. Install the required dependencies:
+\```bash
+npm install
+\```
 
-### `npm run eject`
+4. Start the development server:
+\```bash
+npm start
+\```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+The game should now be running on `http://localhost:3000`.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Usage
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Simply click on any empty cell to make a move. The game will automatically detect and highlight a winning move or a draw.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Contribution
 
-## Learn More
+Contributions are welcome! Please read the [contribution guidelines](CONTRIBUTING.md) first.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## License
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
