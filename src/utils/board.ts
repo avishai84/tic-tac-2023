@@ -71,22 +71,3 @@ export const checkForColumnWinner = (board: (string)[][]):Array<string> | 0 => {
     return newBoard;
 };
 
-
-//   export const checkForDiagnol = <T>(board:(Array<T>)):(string)[] | 0 => {
-//     let newInitBoard = board as Array<T>;
-//     let inc = 0;
-//     let dec = newInitBoard.length - 1;
-//     const newBoard = [[], []] as Array<any>;
-
-//     while (inc < newInitBoard.length) {
-//       newBoard[0].push(newInitBoard[inc][dec]);
-//       // how to solve this type error?
-//       newBoard[1].push(newInitBoard[inc][inc]);
-
-//       inc++;
-//       dec--;
-//     }
-//     if(newBoard.length === 0) return 0;
-
-//     return newBoard;
-//   };
