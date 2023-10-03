@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import styled from "styled-components";
-import {makeBoard} from "../utils/board";
+import {makeBoard, checkForRowWinner, checkForColumnWinner} from "../utils/board";
 
 const DivGame = styled.div ``;
 const Span = styled.span `
@@ -23,26 +23,42 @@ type SizeProps = {
 
 const Board = ({size, playersIcon}:SizeProps):JSX.Element => {
 
-
-
     const [playerIconsState, setPlayerIcons] = useState(['🔥', '🐟']);
     const [board, setBoard] = useState(makeBoard(size));
      const [player, setPlayer] = useState(playerIconsState[0]);
 
     const handleClick = (rowIndex:number, cellIndex:number) => {
+   
     const newBoard = board && [...board];
+   
     if(newBoard){
-        newBoard[rowIndex][cellIndex] = player;
-        setBoard(newBoard);
+        let player1 = newBoard[rowIndex][cellIndex];
+            player1 = player === playerIconsState[0] ? playerIconsState[1] : playerIconsState[0];
+            newBoard[rowIndex][cellIndex] = player1;
+   
+        setPlayer(player1);
+        newBoard && setBoard(newBoard);
+
     }
+    checkForRowWinner(board as any);
+
+//    if(board){
+//     console.log("hi ", checkForRowWinner(board), board);
+//    }
+    console.log("cheking...")
+   if (board && checkForRowWinner(board)) {
+    console.log(`${checkForRowWinner(board)} row win`);
   
-    // console.log(rowIndex, cellIndex);
-    // set the player
-    setPlayer(player === playerIconsState[0] ? playerIconsState[1] : playerIconsState[0]);
+    }
+
+//    if (board && checkForRowWinner(checkForColumnWinner(board) as any)) {
+//         console.log(
+//           `${checkForRowWinner(checkForColumnWinner(board) as any)} column win`
+//         );
+//       }
+
   };
   
-
-// console.log(size, playerIconsState, "state size, playerIconsState")
 
 
   const playerBoard = (
@@ -60,7 +76,6 @@ const Board = ({size, playersIcon}:SizeProps):JSX.Element => {
 );
 
 useEffect(() => {
-    "props updated"
     setBoard(makeBoard(size));
     playersIcon && setPlayerIcons(playersIcon);
     playersIcon && setPlayer(playersIcon[0]);
