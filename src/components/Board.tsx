@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import styled from "styled-components";
-import {makeBoard, checkForRowWinner, checkForColumnWinner} from "../utils/board";
+import {makeBoard, checkForRowWinner, checkForColumnWinner, checkForDiagonal} from "../utils/board";
 
 const DivGame = styled.div ``;
 const Span = styled.span `
@@ -40,7 +40,7 @@ const Board = ({size, playersIcon}:SizeProps):JSX.Element => {
         newBoard && setBoard(newBoard);
 
     }
-    checkForRowWinner(board as any);
+
 
 //    if(board){
 //     console.log("hi ", checkForRowWinner(board), board);
@@ -51,12 +51,14 @@ const Board = ({size, playersIcon}:SizeProps):JSX.Element => {
   
     }
 
-//    if (board && checkForRowWinner(checkForColumnWinner(board) as any)) {
-//         console.log(
-//           `${checkForRowWinner(checkForColumnWinner(board) as any)} column win`
-//         );
-//       }
-
+   if (board && checkForRowWinner(checkForColumnWinner(board) as any)) {
+        console.log(
+          `${checkForRowWinner(checkForColumnWinner(board) as any)} column win`
+        );
+      }
+      if (board && checkForRowWinner(checkForDiagonal(board) as any)) {
+        console.log(`${checkForRowWinner(checkForDiagonal(board) as any)} Diagnol win`);
+      }
   };
   
 

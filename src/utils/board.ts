@@ -50,3 +50,43 @@ export const checkForColumnWinner = (board: (string)[][]):Array<string> | 0 => {
    if(newBoard.length === 0) return 0;
     return newBoard as Array<any>;
   };
+
+  export const checkForDiagonal = <T>(board: T[][]): ((string | 0)[][] | 0) => {
+    let newInitBoard = board as T[][];
+    let inc = 0;
+    let dec = newInitBoard.length - 1;
+    const newBoard: (string | 0)[][] = [[], []];
+
+    while (inc < newInitBoard.length) {
+        // Type assertions to specify the type of elements being pushed
+        newBoard[0].push(newInitBoard[inc][dec] as string | 0);
+        newBoard[1].push(newInitBoard[inc][inc] as string | 0);
+
+        inc++;
+        dec--;
+    }
+
+    if (newBoard.length === 0) return 0;
+
+    return newBoard;
+};
+
+
+//   export const checkForDiagnol = <T>(board:(Array<T>)):(string)[] | 0 => {
+//     let newInitBoard = board as Array<T>;
+//     let inc = 0;
+//     let dec = newInitBoard.length - 1;
+//     const newBoard = [[], []] as Array<any>;
+
+//     while (inc < newInitBoard.length) {
+//       newBoard[0].push(newInitBoard[inc][dec]);
+//       // how to solve this type error?
+//       newBoard[1].push(newInitBoard[inc][inc]);
+
+//       inc++;
+//       dec--;
+//     }
+//     if(newBoard.length === 0) return 0;
+
+//     return newBoard;
+//   };
