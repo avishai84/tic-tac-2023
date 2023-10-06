@@ -1,7 +1,5 @@
 export const makeBoard = (size:number|string = 3):string[][] | null => {
     const sizeNum = Number(size);
-    // const board = [];
-
     const numRows = sizeNum;
     const numCols = sizeNum;
     
@@ -13,13 +11,6 @@ if(boardResults.length === 0){
     return null;
 }
     return boardResults;
-    // for(let i = 0; i < sizeNum; i++){
-    //     board.push([...Array(sizeNum)]);
-    // }
-    // if(board.length === 0){
-    //     return null;
-    // }
-    // return board;
 };
 
 export const checkForRowWinner = <T>(board:(Array<T>)): string => {
@@ -71,3 +62,10 @@ export const checkForColumnWinner = (board: (string)[][]):Array<string> | 0 => {
     return newBoard;
 };
 
+// create a function that accept for string item and return a string
+export const showWinner = (winner:string):string | null => {
+    if(winner.length === 0){
+        return null;
+    }
+    return winner;
+}
