@@ -46,10 +46,10 @@ const IntakeForm = ({handleSubmit}:any):JSX.Element => {
             <label htmlFor="numberCells">Enter a number:
             <input defaultValue={"3"} name="numberCells" type="number" placeholder="Enter a number" />
             </label>
-           <label htmlFor="emojiPlayer1">Select an emoji 1:
+           <label htmlFor="emojiPlayer1">Select player one:
            <select name="emojiPlayer1">{dropDownEmojis}</select>
            </label>
-           <label htmlFor="emojiPlayer2">Select an emoji 2:
+           <label htmlFor="emojiPlayer2">Select player two:
            <select name="emojiPlayer2">{dropDownEmojis}</select>
            </label>
             <button>Start</button>

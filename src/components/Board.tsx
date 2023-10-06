@@ -1,6 +1,7 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useMemo} from "react";
 import styled from "styled-components";
-import {makeBoard, checkForRowWinner, checkForColumnWinner, checkForDiagonal} from "../utils/board";
+import {makeBoard, checkForRowWinner, checkForColumnWinner, checkForDiagonal, showWinner} from "../utils/board";
+import useScores from "../hooks/useScores";
 
 const DivGame = styled.div ``;
 const Span = styled.span `
@@ -25,45 +26,46 @@ const Board = ({size, playersIcon}:SizeProps):JSX.Element => {
 
     const [playerIconsState, setPlayerIcons] = useState(['🔥', '🐟']);
     const [board, setBoard] = useState(makeBoard(size));
-     const [player, setPlayer] = useState(playerIconsState[0]);
+    const [player, setPlayer] = useState(playerIconsState[0]);
+    const [winner, setWinner] = useState<string | null>(null);
+    const { scores, incrementPlayerScore, resetScores} = useScores();
+    const keepScore = (winner:string | null) => {
+        if (winner === playerIconsState[0]) {
+            incrementPlayerScore('player1');
+        }
+        if (winner === playerIconsState[1]) {
+            incrementPlayerScore('player2');
+        }
+    };
 
-    const handleClick = (rowIndex:number, cellIndex:number) => {
+const handleClick = (rowIndex:number, cellIndex:number) => {
    
     const newBoard = board && [...board];
    
     if(newBoard){
-        let player1 = newBoard[rowIndex][cellIndex];
-            player1 = player === playerIconsState[0] ? playerIconsState[1] : playerIconsState[0];
-            newBoard[rowIndex][cellIndex] = player1;
+        let currentPlayer = newBoard[rowIndex][cellIndex];
+            currentPlayer = player === playerIconsState[0] ? playerIconsState[1] : playerIconsState[0];
+            newBoard[rowIndex][cellIndex] = currentPlayer;
    
-        setPlayer(player1);
+        setPlayer(currentPlayer);
         newBoard && setBoard(newBoard);
-
     }
 
-
-//    if(board){
-//     console.log("hi ", checkForRowWinner(board), board);
-//    }
-    console.log("cheking...")
    if (board && checkForRowWinner(board)) {
-    console.log(`${checkForRowWinner(board)} row win`);
-  
+    setWinner(showWinner(checkForRowWinner(board)));
     }
 
    if (board && checkForRowWinner(checkForColumnWinner(board) as any)) {
-        console.log(
-          `${checkForRowWinner(checkForColumnWinner(board) as any)} column win`
-        );
+    setWinner(checkForRowWinner(checkForColumnWinner(board) as any));
       }
-      if (board && checkForRowWinner(checkForDiagonal(board) as any)) {
-        console.log(`${checkForRowWinner(checkForDiagonal(board) as any)} Diagnol win`);
-      }
+    if (board && checkForRowWinner(checkForDiagonal(board) as any)) {
+    setWinner(checkForRowWinner(checkForDiagonal(board) as any));
+    }
   };
   
 
 
-  const playerBoard = (
+  const playerBoard = useMemo(() => (
     board && board.map((row, rowIndex):JSX.Element => {
         return(<DivGame key={rowIndex} style={{display:"flex", justifyContent:"center", gap:"2px"}}>
             {row.map((cell:string, cellIndex:number) => {
@@ -75,7 +77,7 @@ const Board = ({size, playersIcon}:SizeProps):JSX.Element => {
             })}
         </DivGame>)
     })
-);
+), [board]);
 
 useEffect(() => {
     setBoard(makeBoard(size));
@@ -83,8 +85,37 @@ useEffect(() => {
     playersIcon && setPlayer(playersIcon[0]);
 }, [size, playersIcon]);
 
+useEffect(() => {
+    if (winner) {
+        keepScore(winner);
+    }
+  
+}, [winner]);
 
-    return(<Div>{playerBoard}</Div>);
+const keepScores = (<table>
+        <thead>
+            <tr>
+                <th>Players</th>
+                <th>Score</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{playerIconsState[0]}</td>
+                <td>{scores.player1}</td>
+            </tr>
+            <tr>
+                <td>{playerIconsState[1]}</td>
+                <td>{scores.player2}</td>
+            </tr>
+        </tbody>
+</table>);
+
+    return(<>
+        {winner && <DivGame><Div><Span>{winner} </Span><h1>win</h1> <button onClick={() => {setWinner(null);setBoard(makeBoard(size));}}>Play Again</button></Div></DivGame>}
+    <Div>
+        <div>{keepScores}<span><button onClick={() => resetScores()}>Reset Scores</button></span></div>
+        {playerBoard}</Div></>);
 };
 
 export default Board;
