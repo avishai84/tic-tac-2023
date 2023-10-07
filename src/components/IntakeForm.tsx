@@ -2,16 +2,6 @@ import styled from "styled-components";
 // create a form that takes a number input and a icon input
 import {emojis} from "../utils/emojis";
 
-const VisuallyHiddenSpan = styled.span`
-position: absolute;
-width: 1px;
-height: 1px;
-padding: 0;
-margin: -1px;
-overflow: hidden;
-clip: rect(0,0,0,0);
-border: 0;
-`;
 const Div = styled.div `
 position: relative;
 display: flex;
@@ -39,6 +29,7 @@ const IntakeForm = ({handleSubmit}:any):JSX.Element => {
             <> {name} </>
         </option>)
     }));
+
  
     return(<Div>
         <form onSubmit={handleFormSubmit}>

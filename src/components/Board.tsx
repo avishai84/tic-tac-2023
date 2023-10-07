@@ -1,7 +1,18 @@
 import React, {useState, useEffect, useMemo} from "react";
 import styled from "styled-components";
-import {makeBoard, checkForRowWinner, checkForColumnWinner, checkForDiagonal, showWinner} from "../utils/board";
+import {makeBoard, checkForRowWinner, checkForColumnWinner, checkForDiagonal, showWinner, isBoardFull} from "../utils/board";
 import useScores from "../hooks/useScores";
+
+const TableHeadLeft = styled.th `
+border-right: #dffb61 dashed 1px;
+border-bottom: #dffb61 dashed 2px;
+padding: 0 4px 1px 0;
+`;
+const TableHeadRight= styled.th `
+border-left: #dffb61 dashed 1px;
+border-bottom: #dffb61 dashed 2px;
+padding: 0 0 1px 4px;
+`;
 
 const DivGame = styled.div ``;
 const DivGameWithIcon = styled.div<{ nextPlayer: string, isCellOccupied:boolean }>`
@@ -24,7 +35,7 @@ const DivGameWithIcon = styled.div<{ nextPlayer: string, isCellOccupied:boolean 
 `;
 
 const Span = styled.span `
-font-size: 7.5vw; text-shadow: 0px 3px 4px ##2e7b02;`;
+font-size: 7.5vw; text-shadow: 0px 3px 4px #2e7b02;`;
 const Div = styled.div `
 display: flex;
 background-color: #282c34;
@@ -33,7 +44,7 @@ flex-direction: column;
 align-items: center;
 justify-content: center;
 font-size: calc(10px + 2vmin);
-color: white;
+color: #dffb61;
 `;
 
 
@@ -78,12 +89,16 @@ const handleClick = (rowIndex:number, cellIndex:number) => {
    if (board && checkForRowWinner(board)) {
     setWinner(showWinner(checkForRowWinner(board)));
     }
-
    if (board && checkForRowWinner(checkForColumnWinner(board) as any)) {
     setWinner(checkForRowWinner(checkForColumnWinner(board) as any));
       }
     if (board && checkForRowWinner(checkForDiagonal(board) as any)) {
     setWinner(checkForRowWinner(checkForDiagonal(board) as any));
+    }
+    // Check for tie game
+    if (isBoardFull(board)) {
+        setWinner("Tie");
+        return;
     }
   };
   
@@ -124,26 +139,23 @@ useEffect(() => {
 }, [winner]);
 
 const keepScores = (<table>
-        <thead>
-            <tr>
-                <th>Players</th>
-                <th>Score</th>
-            </tr>
+      <thead>
+        <tr>
+          <TableHeadLeft>{playerIconsState[0]}</TableHeadLeft>
+          <TableHeadRight>{playerIconsState[1]}</TableHeadRight>
+          </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>{playerIconsState[0]}</td>
-                <td>{scores.player1}</td>
-            </tr>
-            <tr>
-                <td>{playerIconsState[1]}</td>
-                <td>{scores.player2}</td>
-            </tr>
+          <tr>
+            <td>{scores.player1}</td>
+            <td>{scores.player2}</td>
+          </tr>
         </tbody>
+     
 </table>);
 
     return(<>
-        {winner && <DivGame><Div><Span>{winner} </Span><h1>win</h1>
+        {winner && <DivGame><Div><Span>{winner}</Span>{winner !== "Tie" && <h1>Win</h1>}
         <button onClick={() => {setWinner(null);setBoard(makeBoard(size));
         }
         }>Play Again</button></Div></DivGame>}
