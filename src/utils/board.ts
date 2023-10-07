@@ -69,3 +69,15 @@ export const showWinner = (winner:string):string | null => {
     }
     return winner;
 }
+
+export const isBoardFull = (board: string[][] | null): boolean => {
+  if (board === null) return false;
+  for (let i = 0; i < board.length; i++) {
+      for (let j = 0; j < board[i].length; j++) {
+          if (board[i][j] === "") {
+              return false;
+          }
+      }
+  }
+  return true;
+};
