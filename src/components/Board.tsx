@@ -2,17 +2,10 @@ import React, {useState, useEffect, useMemo} from "react";
 import styled from "styled-components";
 import {makeBoard, checkForRowWinner, checkForColumnWinner, checkForDiagonal, showWinner, isBoardFull} from "../utils/board";
 import useScores from "../hooks/useScores";
+import KeepScoresTable from "./KeepScoresTable";
+import ResetScoreButton from "./ResetScoreButton";
+import WinnerDisplay from "./WinnerDisplay";
 
-const TableHeadLeft = styled.th `
-border-right: #dffb61 dashed 1px;
-border-bottom: #dffb61 dashed 2px;
-padding: 0 4px 1px 0;
-`;
-const TableHeadRight= styled.th `
-border-left: #dffb61 dashed 1px;
-border-bottom: #dffb61 dashed 2px;
-padding: 0 0 1px 4px;
-`;
 
 const DivGame = styled.div ``;
 const DivGameWithIcon = styled.div<{ nextPlayer: string, isCellOccupied:boolean }>`
@@ -33,9 +26,19 @@ const DivGameWithIcon = styled.div<{ nextPlayer: string, isCellOccupied:boolean 
     animation: ${props => (props.isCellOccupied ? 'none' : 'fadein 250ms forwards')};
 }
 `;
+const ScoreDiv = styled.div `display: flex;
+justify-content: center;
+align-items: center;
+gap: 15px;`;
+const ScoreColumnDiv = styled.div `
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+gap: 15px;`;
 
 const Span = styled.span `
-font-size: 7.5vw; text-shadow: 0px 3px 4px #2e7b02;`;
+font-size: 7.5vw; text-shadow: 0px 3px 4px #000;`;
 const Div = styled.div `
 display: flex;
 background-color: #282c34;
@@ -59,7 +62,7 @@ const Board = ({size, playersIcon}:SizeProps):JSX.Element => {
     const [board, setBoard] = useState(makeBoard(size));
     const [player, setPlayer] = useState(playerIconsState[0]);
     const [winner, setWinner] = useState<string | null>(null);
-    const { scores, incrementPlayerScore, resetScores} = useScores();
+    const {scores, incrementPlayerScore, resetScores} = useScores();
     const keepScore = (winner:string | null) => {
         if (winner === playerIconsState[0]) {
             incrementPlayerScore('player1');
@@ -135,34 +138,28 @@ useEffect(() => {
     if (winner) {
         keepScore(winner);
     }
-  
 }, [winner]);
 
-const keepScores = (<table>
-      <thead>
-        <tr>
-          <TableHeadLeft>{playerIconsState[0]}</TableHeadLeft>
-          <TableHeadRight>{playerIconsState[1]}</TableHeadRight>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>{scores.player1}</td>
-            <td>{scores.player2}</td>
-          </tr>
-        </tbody>
-     
-</table>);
+const resetGameFunction = () => {
+    setWinner(null);
+    setBoard(makeBoard(size));
+};
+const resetScoresFunction = () => {
+    resetScores();
+    resetGameFunction()
+};
+const Scores = (<ScoreDiv>
+    <ScoreColumnDiv>  
+        <KeepScoresTable playerIcons={playerIconsState} scores={scores}/>
+        <ResetScoreButton resetScores={resetScoresFunction}/>
+    </ScoreColumnDiv>
+</ScoreDiv>);
 
-    return(<>
-        {winner && <DivGame><Div><Span>{winner}</Span>{winner !== "Tie" && <h1>Win</h1>}
-        <button onClick={() => {setWinner(null);setBoard(makeBoard(size));
-        }
-        }>Play Again</button></Div></DivGame>}
-    <Div>
-        <div>{keepScores}<span><button onClick={() => {resetScores()}}>Reset Scores</button></span></div>
-        <div>{playerBoard}</div>
-        </Div></>);
+    return(
+        <Div>{Scores}{winner === null && playerBoard}
+            <WinnerDisplay winner={winner} resetGame={resetGameFunction}/>
+        </Div>
+       );
 };
 
 export default Board;
