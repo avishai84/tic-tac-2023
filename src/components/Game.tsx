@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Board from './Board';
-import Dashborad from './Dashboard';
+import Dashboard from './Dashboard';
 import {ScoresProp} from "../hooks/useScores";
 
 function Game() {
@@ -20,14 +20,19 @@ const updateScoresAndIcons = (players:string[], scores:ScoresProp) => {
     setScore(scores);
   }
 
+
   return (
     <div>
-      <Dashborad
+      <Dashboard
         handlePlayers={handlePlayers}
         players={playerIconsState}
         score={score}
       />
-      <Board size={numberCells} playersIcon={emojiPlayers} updateScoresAndIcons={updateScoresAndIcons}/>
+      <Board 
+        size={numberCells} 
+        playersIcon={emojiPlayers} 
+        updateScoresAndIcons={updateScoresAndIcons}   
+        />
     </div>
   );
 }

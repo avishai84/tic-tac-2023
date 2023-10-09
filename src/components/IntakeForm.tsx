@@ -12,6 +12,22 @@ flex-direction: column;
 align-items: center;
 justify-content: center;`;
 
+const Label = styled.label `
+display:flex;
+font-size:3.7vw;
+padding:2px 5px;
+& input{
+    width:20%;
+    padding:5px;
+}
+& select{
+    width:39%;
+    padding:5px;
+}
+`;
+const Input = styled.input ``;
+const Select = styled.select ``;
+
 type IntakeFormProps<T> = {
     handleSubmit: (numberCells:T, emojiPlayer1:T, emojiPlayer2:T) => void;
 };
@@ -40,15 +56,15 @@ const IntakeForm = <T,>({ handleSubmit }: IntakeFormProps<T>):JSX.Element => {
     return(<Div>
         <form onSubmit={handleFormSubmit}>
         <Div>
-            <label htmlFor="numberCells">Enter a number:
-            <input defaultValue={"3"} name="numberCells" id="numberCells" type="number" placeholder="Enter a number" />
-            </label>
-           <label htmlFor="emojiPlayer1">Select player one:
-           <select name="emojiPlayer1" id="emojiPlayer1">{dropDownEmojis}</select>
-           </label>
-           <label htmlFor="emojiPlayer2">Select player two:
-           <select name="emojiPlayer2" id="emojiPlayer2">{dropDownEmojis}</select>
-           </label>
+            <Label htmlFor="numberCells">Enter a number:
+            <Input defaultValue={"3"} name="numberCells" id="numberCells" type="number" placeholder="Enter a number" />
+            </Label>
+           <Label htmlFor="emojiPlayer1">Select player one:
+           <Select name="emojiPlayer1" id="emojiPlayer1">{dropDownEmojis}</Select>
+           </Label>
+           <Label htmlFor="emojiPlayer2">Select player two:
+           <Select name="emojiPlayer2" id="emojiPlayer2">{dropDownEmojis}</Select>
+           </Label>
             <button><Replace />Change</button>
             </Div>
         </form>

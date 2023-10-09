@@ -2,8 +2,9 @@ import {useState, useEffect, useMemo} from "react";
 import styled from "styled-components";
 import {makeBoard, checkForRowWinner, checkForColumnWinner, checkForDiagonal, showWinner, isBoardFull} from "../utils/board";
 import useScores, {ScoresProp} from "../hooks/useScores";
-
 import ResetScoreButton from "./ResetScoreButton";
+
+
 import WinnerDisplay from "./WinnerDisplay";
 
 const DivGame = styled.div ``;
@@ -27,8 +28,6 @@ const DivGame = styled.div ``;
     }
 `;
 
-
-
 const Span = styled.span `
 font-size: 7.5vw; text-shadow: 0px 3px 4px #000;`;
 const Div = styled.div `
@@ -47,6 +46,7 @@ type SizeProps = {
     size: string;
     playersIcon?: string[];
     updateScoresAndIcons: (players:string[], scores:ScoresProp) => void;
+    
     };
 
 const Board = ({size, playersIcon, updateScoresAndIcons}:SizeProps):JSX.Element => {
@@ -139,18 +139,19 @@ const resetGameFunction = () => {
     setWinner(null);
     setBoard(makeBoard(size));
 };
+
 const resetScoresFunction = () => {
     resetScores();
     resetGameFunction()
 };
 
 
-
     return(
         <Div>
+            <ResetScoreButton resetScoresFunction={resetScoresFunction}/>
             <WinnerDisplay winner={winner} resetGame={resetGameFunction}/>
             {winner === null && playerBoard}
-            <ResetScoreButton resetScores={resetScoresFunction}/>
+            
         </Div>
        );
 };

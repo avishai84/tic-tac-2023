@@ -20,14 +20,15 @@ align-items: center;
 gap: 15px;`;
 
 
-type DashboradProps = {
+type DashboardProps = {
     score: ScoresProp;
     players: string[];
     handlePlayers: (numberCells:string, emojiPlayer1:string, emojiPlayer2:string) => void;
+    
 };
 
-const Dashborad = ({players, score, handlePlayers}:DashboradProps) => {
-   
+const Dashboard = ({players, score, handlePlayers}:DashboardProps) => {
+
     return (
         <Header>
         <H1>Dashboard</H1>
@@ -42,4 +43,4 @@ const Dashborad = ({players, score, handlePlayers}:DashboradProps) => {
     )
 };
 
-export default Dashborad;
+export default Dashboard;
