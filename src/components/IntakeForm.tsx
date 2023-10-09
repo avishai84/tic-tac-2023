@@ -1,6 +1,7 @@
 import styled from "styled-components";
 // create a form that takes a number input and a icon input
 import {emojis} from "../utils/emojis";
+import {Replace} from "lucide-react"
 
 const Div = styled.div `
 position: relative;
@@ -11,17 +12,22 @@ flex-direction: column;
 align-items: center;
 justify-content: center;`;
 
-const IntakeForm = ({handleSubmit}:any):JSX.Element => {
+type IntakeFormProps<T> = {
+    handleSubmit: (numberCells:T, emojiPlayer1:T, emojiPlayer2:T) => void;
+};
+const IntakeForm = <T,>({ handleSubmit }: IntakeFormProps<T>):JSX.Element => {
 
     const handleFormSubmit = (event:React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+ 
     const form = event.currentTarget;
+  
     const formData = new FormData(form);
-    const numberCells = formData.get('numberCells');
-    const emojiPlayer1 = formData.get('emojiPlayer1');
-    const emojiPlayer2 = formData.get('emojiPlayer2');
+    const numberCells = formData.get('numberCells') as unknown as T;
+    const emojiPlayer1 = formData.get('emojiPlayer1') as unknown as T;
+    const emojiPlayer2 = formData.get('emojiPlayer2') as unknown as T;
 
-     handleSubmit(numberCells, emojiPlayer1, emojiPlayer2);
+    handleSubmit(numberCells, emojiPlayer1, emojiPlayer2);
 }
 
     const dropDownEmojis = (emojis.map(({name, symbol}, index:number) => {
@@ -35,15 +41,15 @@ const IntakeForm = ({handleSubmit}:any):JSX.Element => {
         <form onSubmit={handleFormSubmit}>
         <Div>
             <label htmlFor="numberCells">Enter a number:
-            <input defaultValue={"3"} name="numberCells" type="number" placeholder="Enter a number" />
+            <input defaultValue={"3"} name="numberCells" id="numberCells" type="number" placeholder="Enter a number" />
             </label>
            <label htmlFor="emojiPlayer1">Select player one:
-           <select name="emojiPlayer1">{dropDownEmojis}</select>
+           <select name="emojiPlayer1" id="emojiPlayer1">{dropDownEmojis}</select>
            </label>
            <label htmlFor="emojiPlayer2">Select player two:
-           <select name="emojiPlayer2">{dropDownEmojis}</select>
+           <select name="emojiPlayer2" id="emojiPlayer2">{dropDownEmojis}</select>
            </label>
-            <button>Start</button>
+            <button><Replace />Change</button>
             </Div>
         </form>
         </Div>);

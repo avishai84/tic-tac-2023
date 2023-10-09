@@ -9,9 +9,9 @@ const WinnerDisplay = ({ winner, resetGame }: WinnerDisplayProps) => {
     return (
         <div>
             {winner && <h2>{winner} Won!</h2>}
-            <button onClick={resetGame}>
+            {winner &&  <button onClick={resetGame}>
             <RefreshCw />New Game
-            </button>
+            </button>}
         </div>
     );
 };
