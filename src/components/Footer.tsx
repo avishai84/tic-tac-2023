@@ -22,11 +22,13 @@ const FooterLink = styled.a`
 `;
 
 const Footer = () => {
-
+    const now = new Date();
+    const currentYear = now.getFullYear();
+  
     return (
         <StyledFooter>
             <p>
-                © 2023 by My Company. All rights reserved.
+                © 2023-{currentYear} by FishAndFire.com. All rights reserved.
                 <FooterLink href="#">Terms of Service</FooterLink>
                 <FooterLink href="#">Privacy Policy</FooterLink>
             </p>
