@@ -6,9 +6,11 @@ import KeepScoresTable from "./KeepScoresTable";
 
 const H1 = styled.h1`
 color: #dffb61;
+margin:0;
 `;
 
-const ScoreDiv = styled.div `display: flex;
+const ScoreDiv = styled.div `
+display: flex;
 justify-content: center;
 align-items: center;
 gap: 15px;`;
@@ -18,6 +20,7 @@ flex-direction: column;
 justify-content: center;
 align-items: center;
 gap: 15px;`;
+
 
 
 type DashboardProps = {
@@ -31,8 +34,7 @@ const Dashboard = ({players, score, handlePlayers}:DashboardProps) => {
 
     return (
         <Header>
-        <H1>Dashboard</H1>
-        <h3>Tic Tac Toe - The Fish And Fire Edition</h3>
+            <H1>Tic Tac Toe - The Fish And Fire Edition</H1>
         <IntakeForm handleSubmit={handlePlayers}/>
         <ScoreDiv>
             <ScoreColumnDiv>  

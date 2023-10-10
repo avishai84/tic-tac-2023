@@ -9,6 +9,9 @@ import WinnerDisplay from "./WinnerDisplay";
 
 const DivGame = styled.div ``;
 
+
+
+
     const DivGameWithIcon = styled.div<{ $nextPlayer: string, $isCellOccupied: boolean }>`
     @keyframes fadein {
         from {
@@ -33,7 +36,6 @@ font-size: 7.5vw; text-shadow: 0px 3px 4px #000;`;
 const Div = styled.div `
 display: flex;
 background-color: #282c34;
-min-height: 90vh;
 flex-direction: column;
 align-items: center;
 justify-content: center;
@@ -148,10 +150,12 @@ const resetScoresFunction = () => {
 
     return(
         <Div>
+           
             <ResetScoreButton resetScoresFunction={resetScoresFunction}/>
             <WinnerDisplay winner={winner} resetGame={resetGameFunction}/>
+         
+
             {winner === null && playerBoard}
-            
         </Div>
        );
 };

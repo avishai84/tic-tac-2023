@@ -7,24 +7,40 @@ const Div = styled.div `
 position: relative;
 display: flex;
 background-color: #282c34;
-min-height: 10vh;
+// min-height: 10vh;
 flex-direction: column;
 align-items: center;
 justify-content: center;`;
 
 const Label = styled.label `
-display:flex;
 font-size:3.7vw;
 padding:2px 5px;
 & input{
-    width:20%;
+    width:100%;
     padding:5px;
 }
 & select{
-    width:39%;
+    width:100%;
     padding:5px;
 }
 `;
+
+const DivGridFourR = styled.div `
+display: grid;
+grid-template-columns: 1fr 1fr 1fr 1fr; 
+grid-template-rows: auto auto auto auto; 
+gap: 16px; 
+align-items: center; 
+justify-items: center;
+
+& label > * {
+    
+}
+& button{
+    align-self: end;
+}
+`;
+
 const Input = styled.input ``;
 const Select = styled.select ``;
 
@@ -55,18 +71,18 @@ const IntakeForm = <T,>({ handleSubmit }: IntakeFormProps<T>):JSX.Element => {
  
     return(<Div>
         <form onSubmit={handleFormSubmit}>
-        <Div>
-            <Label htmlFor="numberCells">Enter a number:
-            <Input defaultValue={"3"} name="numberCells" id="numberCells" type="number" placeholder="Enter a number" />
+        <DivGridFourR>
+            <Label htmlFor="numberCells">Grid:
+                <Input defaultValue={"3"} name="numberCells" id="numberCells" type="number" placeholder="Enter a number" />
             </Label>
-           <Label htmlFor="emojiPlayer1">Select player one:
+           <Label htmlFor="emojiPlayer1">Player 1:
            <Select name="emojiPlayer1" id="emojiPlayer1">{dropDownEmojis}</Select>
            </Label>
-           <Label htmlFor="emojiPlayer2">Select player two:
+           <Label htmlFor="emojiPlayer2">Player 2:
            <Select name="emojiPlayer2" id="emojiPlayer2">{dropDownEmojis}</Select>
            </Label>
             <button><Replace />Change</button>
-            </Div>
+            </DivGridFourR> 
         </form>
         </Div>);
 };
