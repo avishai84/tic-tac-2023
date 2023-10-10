@@ -7,6 +7,7 @@ import KeepScoresTable from "./KeepScoresTable";
 const H1 = styled.h1`
 color: #dffb61;
 margin:0;
+font-size:7.5vw;
 `;
 
 const ScoreDiv = styled.div `
@@ -14,6 +15,7 @@ display: flex;
 justify-content: center;
 align-items: center;
 gap: 15px;`;
+
 const ScoreColumnDiv = styled.div `
 display: flex;
 flex-direction: column;
@@ -27,7 +29,6 @@ type DashboardProps = {
     score: ScoresProp;
     players: string[];
     handlePlayers: (numberCells:string, emojiPlayer1:string, emojiPlayer2:string) => void;
-    
 };
 
 const Dashboard = ({players, score, handlePlayers}:DashboardProps) => {

@@ -20,7 +20,6 @@ const updateScoresAndIcons = (players:string[], scores:ScoresProp) => {
     setScore(scores);
   }
 
-
   return (
     <div>
       <Dashboard

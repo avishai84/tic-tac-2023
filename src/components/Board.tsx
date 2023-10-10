@@ -8,11 +8,7 @@ import ResetScoreButton from "./ResetScoreButton";
 import WinnerDisplay from "./WinnerDisplay";
 
 const DivGame = styled.div ``;
-
-
-
-
-    const DivGameWithIcon = styled.div<{ $nextPlayer: string, $isCellOccupied: boolean }>`
+const DivGameWithIcon = styled.div<{ $nextPlayer: string, $isCellOccupied: boolean }>`
     @keyframes fadein {
         from {
             opacity: 0;
@@ -146,15 +142,10 @@ const resetScoresFunction = () => {
     resetScores();
     resetGameFunction()
 };
-
-
     return(
         <Div>
-           
             <ResetScoreButton resetScoresFunction={resetScoresFunction}/>
             <WinnerDisplay winner={winner} resetGame={resetGameFunction}/>
-         
-
             {winner === null && playerBoard}
         </Div>
        );

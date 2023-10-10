@@ -15,9 +15,6 @@ justify-items: center;
 padding: 16px; 
 `;
 const WinnerDisplay = ({ winner, resetGame }: WinnerDisplayProps) => {
-    
-    
-    
     return (
         <DivGridTwoCol>
             {winner && <h2>{winner} Won!</h2>}
