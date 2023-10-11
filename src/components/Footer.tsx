@@ -29,8 +29,8 @@ const Footer = () => {
         <StyledFooter>
             <p>
                 © 2023-{currentYear} by FishAndFire.com. All rights reserved.
-                <FooterLink href="#">Terms of Service</FooterLink>
-                <FooterLink href="#">Privacy Policy</FooterLink>
+                <FooterLink target="_blank" href="https://github.com/avishai84/tic-tac-2023">Github</FooterLink>
+                <FooterLink target="_blank" href="https://www.linkedin.com/in/ataashur/">Linkedin</FooterLink>
             </p>
         </StyledFooter>
     );
