@@ -1,13 +1,13 @@
 import {Binary} from "lucide-react"
 
 type ResetScoreProps = {
-    resetScores: () => void;
+  resetScoresFunction: () => void;
 };
 
-const ResetScoreButton = ({resetScores}:ResetScoreProps) => {
+const ResetScoreButton = ({resetScoresFunction}:ResetScoreProps) => {
  
   return (
-    <button onClick={resetScores}><Binary />Reset Scores</button>
+    <button onClick={resetScoresFunction}><Binary />Reset Scores</button>
   );
 };
 export default ResetScoreButton;

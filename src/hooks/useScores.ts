@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
 
-type Scores = {
+export type ScoresProp = {
   player1: number;
   player2: number;
 };
 
 const useScores = () => {
   // Load scores from local storage or set to default values.
-  const initialScores: Scores = JSON.parse(localStorage.getItem('scores') || '{"player1": 0, "player2": 0}');
+  const initialScores: ScoresProp = JSON.parse(localStorage.getItem('scores') || '{"player1": 0, "player2": 0}');
 
-  const [scores, setScores] = useState<Scores>(initialScores);
+  const [scores, setScores] = useState<ScoresProp>(initialScores);
 
   useEffect(() => {
     // Whenever scores change, update local storage.
