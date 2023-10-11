@@ -16,12 +16,15 @@ padding: 16px;
 `;
 const WinnerDisplay = ({ winner, resetGame }: WinnerDisplayProps) => {
     return (
+        <dialog open={!!winner}>
+
         <DivGridTwoCol>
             {winner && <h2>{winner} Won!</h2>}
             {winner && <button onClick={resetGame}>
             <RefreshCw />New Game
             </button>}
         </DivGridTwoCol>
+        </dialog>
     );
 };
 export default WinnerDisplay;
