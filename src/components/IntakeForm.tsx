@@ -3,7 +3,7 @@ import styled from "styled-components";
 // create a form that takes a number input and a icon input
 import {emojis} from "../utils/emojis";
 import {Replace} from "lucide-react"
-import {FormControl, Button, Input, Select as SelectMUI, MenuItem } from '@mui/material';
+import {InputLabel, TextField, FormControl, Button, Input, Select as SelectMUI, MenuItem } from '@mui/material';
 
 const Div = styled.div `
 position: relative;
@@ -14,19 +14,20 @@ flex-direction: column;
 align-items: center;
 justify-content: center;`;
 
-const Label = styled.label `
-font-size:3.7vw;
-padding:2px 5px;
-& input{
-    width:100%;
-    padding:5px;
-}
-& select{
-    width:100%;
-    padding:5px;
-}
+const SelcrCustom = styled(SelectMUI) `
+background-color:  #fff;
+color:#dffb61;
 `;
-
+const LabelCustom = styled(InputLabel)`
+background-color: #fff;
+color:#dffb61;
+border-color: #dffb61;
+`;
+const CustomTextField = styled(TextField) `
+// background-color:  #fff;
+color:#dffb61;
+border-color: #dffb61;
+`;
 const DivGridFourR = styled.div `
 display: grid;
 grid-template-columns: 1fr 1fr 1fr 1fr; 
@@ -44,8 +45,6 @@ justify-items: center;
 `;
 
 
-const Select = styled.select ``;
-
 type IntakeFormProps<T> = {
     handleSubmit: (numberCells:T, emojiPlayer1:T, emojiPlayer2:T) => void;
 };
@@ -53,19 +52,22 @@ const IntakeForm = <T,>({ handleSubmit }: IntakeFormProps<T>):JSX.Element => {
     const [numberCells, setNumberCells] = useState<T>();
     const [emojiPlayer1, setEmojiPlayer1] = useState<T>();
     const [emojiPlayer2, setEmojiPlayer2] = useState<T>();
-
+    console.log("handleSubmit " , handleSubmit)
     const handleFormSubmit = (event:React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
  
     const form = event.currentTarget;
-        console.log(form)
+       
     // const formData = new FormData(form);
     // const numberCells = formData.get('numberCells') as unknown as T;
     // const emojiPlayer1 = formData.get('emojiPlayer1') as unknown as T;
     // const emojiPlayer2 = formData.get('emojiPlayer2') as unknown as T;
 
-    handleSubmit(numberCells, emojiPlayer1, emojiPlayer2);
+    //
 }
+    const getData = () => {
+        handleSubmit(numberCells as unknown as T, emojiPlayer1 as unknown as T, emojiPlayer2 as unknown as T);
+    };
 
     const dropDownEmojis = (emojis.map(({name, symbol}, index:number) => {
         return(<MenuItem key={index} value={symbol}>{symbol}
@@ -75,10 +77,14 @@ const IntakeForm = <T,>({ handleSubmit }: IntakeFormProps<T>):JSX.Element => {
 
  
     return(<Div>
-        <form onSubmit={handleFormSubmit}>
+      
         <DivGridFourR>
-            <FormControl variant="outlined">
-            <Label htmlFor="numberCells">Grid:
+        <FormControl variant="outlined">
+            <CustomTextField defaultValue="3" type="number" label="Grid" placeholder="Grid: Enter a number" variant="outlined">Grid: Enter a number</CustomTextField>
+        </FormControl>
+            
+            {/* <FormControl variant="outlined">
+                <Label htmlFor="numberCells">Grid:
                 <Input 
                     defaultValue={"3"}
                     name="numberCells"
@@ -89,31 +95,31 @@ const IntakeForm = <T,>({ handleSubmit }: IntakeFormProps<T>):JSX.Element => {
                     onChange={(e) => setNumberCells(e.target.value as unknown as T)}
                     />
             </Label>
-            </FormControl>
-            <FormControl>
-           <Label htmlFor="emojiPlayer1">Player 1:
-           <SelectMUI 
+            </FormControl> */}
+            <FormControl variant="outlined">
+            <LabelCustom id="emojiPlayer1">Player 1: </LabelCustom>
+           <SelcrCustom 
             name="emojiPlayer1"
             id="emojiPlayer1"
             value={emojiPlayer1}
             onChange={(e) => setEmojiPlayer1(e.target.value as T)}
-            >{dropDownEmojis}</SelectMUI>
-           </Label>
-           <Label htmlFor="emojiPlayer2">Player 2:
-           <SelectMUI
+            >{dropDownEmojis}</SelcrCustom>
+           </FormControl>
+           <FormControl variant="outlined">
+           <LabelCustom htmlFor="emojiPlayer2">Player 2: </LabelCustom>
+           <SelcrCustom
             name="emojiPlayer2"
             id="emojiPlayer2"
             value={emojiPlayer2}
-            onChange={(e) => setEmojiPlayer2(e.target.value as T)}
-            >{dropDownEmojis}</SelectMUI>
-           </Label>
-           </FormControl>
-           <FormControl>
-           <Button variant="contained" startIcon={<Replace />}>Change</Button>
+            onChange={(e) => setEmojiPlayer2(e.target.value as unknown as T)}
+            >{dropDownEmojis}</SelcrCustom>
+          
+           
+           <Button onClick={getData}variant="contained" startIcon={<Replace />}>Change</Button>
            </FormControl>
           
-            </DivGridFourR> 
-        </form>
+        </DivGridFourR> 
+       
         </Div>);
 };
 
