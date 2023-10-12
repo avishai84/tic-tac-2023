@@ -7,7 +7,7 @@ import KeepScoresTable from "./KeepScoresTable";
 const H1 = styled.h1`
 color: #dffb61;
 margin:0;
-font-size:7.5vw;
+font-size:5.5vw;
 `;
 
 const ScoreDiv = styled.div `
@@ -35,7 +35,7 @@ const Dashboard = ({players, score, handlePlayers}:DashboardProps) => {
 
     return (
         <Header>
-            <H1>Tic Tac Toe - The Fish And Fire Edition</H1>
+            <H1 >Tic Tac Toe - The Fish And Fire Edition</H1>
         <IntakeForm handleSubmit={handlePlayers}/>
         <ScoreDiv>
             <ScoreColumnDiv>  
