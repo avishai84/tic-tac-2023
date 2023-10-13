@@ -7,7 +7,7 @@ import KeepScoresTable from "./KeepScoresTable";
 const H1 = styled.h1`
 color: #dffb61;
 margin:0;
-font-size:5.5vw;
+font-size:2.5vw;
 `;
 
 const ScoreDiv = styled.div `
