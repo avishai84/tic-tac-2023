@@ -3,18 +3,7 @@ import styled from "styled-components";
 import {emojis} from "../utils/emojis";
 import {InputLabel, TextField, FormControl, Button, Input, Select as SelectMUI, MenuItem } from '@mui/material';
 
-const Div = styled.div `
-position: relative;
-display: flex;
-background-color: #282c34;
-// min-height: 10vh;
-flex-direction: column;
-align-items: center;
-justify-content: center;`;
-
-const CustomSelect = styled(SelectMUI) `
-
-`;
+const CustomSelect = styled(SelectMUI)``;
 const LabelCustom = styled(InputLabel)`
 background-color: #282c34;
 color: #fff !important;
@@ -33,12 +22,18 @@ color: #fff !important;
   }
 `;
 const CustomTextField = styled(TextField) `
+.MuiOutlinedInput-notchedOutline, .Mui-focused .MuiOutlinedInput-notchedOutline{
+    border-color:white!important;
+    & label.Mui-focused{
+        color:white!important;
+    }
+}
 label {
     color: #fff;
     background-color: #282c34;
     & ~ div, & ~ div:focus-within {
-        border:1px solid white;
         color:white;
+        max-width:150px;
     }
 }
 & div {
@@ -50,19 +45,8 @@ label {
 `;
 
 const DivGridFourR = styled.div `
-display: grid;
-grid-template-columns: 1fr 1fr 1fr 1fr; 
-grid-template-rows: auto auto auto auto; 
-gap: 16px; 
-align-items: center; 
-justify-items: center;
-
-& label > * {
-    
-}
-& button{
-    align-self: end;
-}
+text-align:center;
+white-space: wrap;
 `;
 
 
@@ -85,8 +69,7 @@ const IntakeForm = <T,>({ handleSubmit }: IntakeFormProps<T>):JSX.Element => {
         handleSubmit(numberCells as unknown as T, emojiPlayer1 as unknown as T, emojiPlayer2 as unknown as T);
     },[numberCells, emojiPlayer1, emojiPlayer2]);
  
-    return(<Div>
-      
+    return(
         <DivGridFourR>
             <FormControl variant="outlined">
                 <CustomTextField 
@@ -119,7 +102,7 @@ const IntakeForm = <T,>({ handleSubmit }: IntakeFormProps<T>):JSX.Element => {
             >{dropDownEmojis}</CustomSelect>
            </FormControl>
         </DivGridFourR> 
-        </Div>);
+       );
 };
 
 export default IntakeForm;
