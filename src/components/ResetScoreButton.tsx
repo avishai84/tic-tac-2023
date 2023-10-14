@@ -1,4 +1,5 @@
 import {Binary} from "lucide-react"
+import {Button} from "@mui/material";
 
 type ResetScoreProps = {
   resetScoresFunction: () => void;
@@ -7,7 +8,7 @@ type ResetScoreProps = {
 const ResetScoreButton = ({resetScoresFunction}:ResetScoreProps) => {
  
   return (
-    <button onClick={resetScoresFunction}><Binary />Reset Scores</button>
+    <Button variant="contained" startIcon={<Binary />} onClick={resetScoresFunction}>Reset Scores</Button>
   );
 };
 export default ResetScoreButton;

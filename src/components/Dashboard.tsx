@@ -3,27 +3,13 @@ import IntakeForm from './IntakeForm';
 import styled from "styled-components";
 import {ScoresProp} from "../hooks/useScores";
 import KeepScoresTable from "./KeepScoresTable";
+import Grid from '@mui/material/Unstable_Grid2';
 
 const H1 = styled.h1`
 color: #dffb61;
-margin:0;
-font-size:7.5vw;
+margin:5px 0 15px 0;
+font-size:2.5vw;
 `;
-
-const ScoreDiv = styled.div `
-display: flex;
-justify-content: center;
-align-items: center;
-gap: 15px;`;
-
-const ScoreColumnDiv = styled.div `
-display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-gap: 15px;`;
-
-
 
 type DashboardProps = {
     score: ScoresProp;
@@ -36,12 +22,14 @@ const Dashboard = ({players, score, handlePlayers}:DashboardProps) => {
     return (
         <Header>
             <H1>Tic Tac Toe - The Fish And Fire Edition</H1>
-        <IntakeForm handleSubmit={handlePlayers}/>
-        <ScoreDiv>
-            <ScoreColumnDiv>  
-                <KeepScoresTable playerIcons={players} scores={score}/>
-            </ScoreColumnDiv>
-        </ScoreDiv>
+                <Grid sx={{flexBasis: "fit-content",alignItems:"center", justifyContent:"center"}} container spacing={2}>
+                    <Grid sx={{alignSelf:"center", justifyItems:"center"  }} xs={12}  >
+                        <IntakeForm handleSubmit={handlePlayers}/>
+                    </Grid>
+                    <Grid sx={{flexBasis: "fit-content"}} xs={12} >
+                        <KeepScoresTable playerIcons={players} scores={score}/>
+                    </Grid>
+                </Grid>
         </Header>
     )
 };

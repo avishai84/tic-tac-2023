@@ -1,5 +1,6 @@
 import {RefreshCw} from "lucide-react"
 import styled from "styled-components";
+import {Button} from "@mui/material";
 
 type WinnerDisplayProps = {
     winner: string | null;
@@ -16,12 +17,15 @@ padding: 16px;
 `;
 const WinnerDisplay = ({ winner, resetGame }: WinnerDisplayProps) => {
     return (
+        <dialog open={!!winner}>
+
         <DivGridTwoCol>
             {winner && <h2>{winner} Won!</h2>}
-            {winner && <button onClick={resetGame}>
-            <RefreshCw />New Game
-            </button>}
+            {winner && <Button variant="contained" startIcon={<RefreshCw />} onClick={resetGame}>
+            New Game
+            </Button>}
         </DivGridTwoCol>
+        </dialog>
     );
 };
 export default WinnerDisplay;

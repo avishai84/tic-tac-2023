@@ -1,6 +1,5 @@
 import styled from "styled-components";
 
-// create header using styled components
 const Header = styled.header`
   display: flex;
   background-color: #282c34;
