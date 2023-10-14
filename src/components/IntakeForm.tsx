@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
 import {emojis} from "../utils/emojis";
-import {InputLabel, TextField, FormControl, Button, Input, Select as SelectMUI, MenuItem } from '@mui/material';
+import {InputLabel, TextField, FormControl, Select as SelectMUI, MenuItem } from '@mui/material';
 
 const CustomSelect = styled(SelectMUI)``;
 const LabelCustom = styled(InputLabel)`

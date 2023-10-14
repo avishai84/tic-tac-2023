@@ -3,8 +3,6 @@ import styled from "styled-components";
 import {makeBoard, checkForRowWinner, checkForColumnWinner, checkForDiagonal, showWinner, isBoardFull} from "../utils/board";
 import useScores, {ScoresProp} from "../hooks/useScores";
 import ResetScoreButton from "./ResetScoreButton";
-
-
 import WinnerDisplay from "./WinnerDisplay";
 
 const DivGame = styled.div ``;
