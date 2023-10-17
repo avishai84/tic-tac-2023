@@ -146,9 +146,9 @@ const resetScoresFunction = () => {
         <Div>
             <WinnerDisplay winner={winner} resetGame={resetGameFunction}/>
             {winner === null && playerBoard}
-            <Grid sx={{marginTop:"15px", flexBasis: "fit-content"}} xs={12} >
+            {winner === null && <Grid sx={{marginTop:"15px", flexBasis: "fit-content"}} xs={12} >
                 <ResetScoreButton resetScoresFunction={() => resetScoresFunction()}/>
-            </Grid>
+            </Grid>}
         </Div>
        );
 };

@@ -17,13 +17,19 @@ padding: 16px;
 const CustomDialog = styled.dialog`
     background-color: rgba(255,255,255,.75);
 `;
+
+const styles = {
+    fontSize: "1.5vh",
+    fontWeight: "bold",
+  }
+
 const WinnerDisplay = ({ winner, resetGame }: WinnerDisplayProps) => {
     return (
         <CustomDialog open={!!winner}>
 
         <DivGridTwoCol>
             {winner !== "Tie" ? <h2>{winner} Won!</h2>: <h2>It's a Tie!</h2>}
-            {winner && <Button variant="contained" startIcon={<RefreshCw />} onClick={resetGame}>
+            {winner && <Button sx={styles} variant="contained" startIcon={<RefreshCw />} onClick={resetGame}>
             New Game
             </Button>}
         </DivGridTwoCol>
