@@ -2,8 +2,9 @@ import {useState, useEffect, useMemo} from "react";
 import styled from "styled-components";
 import {makeBoard, checkForRowWinner, checkForColumnWinner, checkForDiagonal, showWinner, isBoardFull} from "../utils/board";
 import useScores, {ScoresProp} from "../hooks/useScores";
-import ResetScoreButton from "./ResetScoreButton";
 import WinnerDisplay from "./WinnerDisplay";
+import Grid from '@mui/material/Unstable_Grid2';
+import ResetScoreButton from "./ResetScoreButton";
 
 const DivGame = styled.div ``;
 const DivGameWithIcon = styled.div<{ $nextPlayer: string, $isCellOccupied: boolean }>`
@@ -42,7 +43,6 @@ type SizeProps = {
     size: string;
     playersIcon?: string[];
     updateScoresAndIcons: (players:string[], scores:ScoresProp) => void;
-    
     };
 
 const Board = ({size, playersIcon, updateScoresAndIcons}:SizeProps):JSX.Element => {
@@ -51,7 +51,9 @@ const Board = ({size, playersIcon, updateScoresAndIcons}:SizeProps):JSX.Element 
     const [board, setBoard] = useState(makeBoard(size));
     const [player, setPlayer] = useState(playerIconsState[0]);
     const [winner, setWinner] = useState<string | null>(null);
+
     const {scores, incrementPlayerScore, resetScores} = useScores();
+
     const keepScore = (winner:string | null) => {
         if (winner === playerIconsState[0]) {
             incrementPlayerScore('player1');
@@ -73,7 +75,6 @@ const handleClick = (rowIndex:number, cellIndex:number) => {
         let currentPlayer = newBoard[rowIndex][cellIndex];
             currentPlayer = player === playerIconsState[0] ? playerIconsState[1] : playerIconsState[0];
             newBoard[rowIndex][cellIndex] = currentPlayer;
-   
         setPlayer(currentPlayer);
         newBoard && setBoard(newBoard);
     }
@@ -140,11 +141,14 @@ const resetScoresFunction = () => {
     resetScores();
     resetGameFunction()
 };
+
     return(
         <Div>
-            <ResetScoreButton resetScoresFunction={resetScoresFunction}/>
             <WinnerDisplay winner={winner} resetGame={resetGameFunction}/>
             {winner === null && playerBoard}
+            <Grid sx={{marginTop:"15px", flexBasis: "fit-content"}} xs={12} >
+                <ResetScoreButton resetScoresFunction={() => resetScoresFunction()}/>
+            </Grid>
         </Div>
        );
 };
