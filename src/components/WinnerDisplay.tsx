@@ -1,7 +1,6 @@
 import {RefreshCw} from "lucide-react"
 import styled from "styled-components";
 import {Button} from "@mui/material";
-
 type WinnerDisplayProps = {
     winner: string | null;
     resetGame: () => void;
@@ -15,17 +14,26 @@ align-items: center;
 justify-items: center;
 padding: 16px; 
 `;
+const CustomDialog = styled.dialog`
+    background-color: rgba(255,255,255,.75);
+`;
+
+const styles = {
+    fontSize: "1.5vh",
+    fontWeight: "bold",
+  }
+
 const WinnerDisplay = ({ winner, resetGame }: WinnerDisplayProps) => {
     return (
-        <dialog open={!!winner}>
+        <CustomDialog open={!!winner}>
 
         <DivGridTwoCol>
-            {winner && <h2>{winner} Won!</h2>}
-            {winner && <Button variant="contained" startIcon={<RefreshCw />} onClick={resetGame}>
+            {winner !== "Tie" ? <h2>{winner} Won!</h2>: <h2>It's a Tie!</h2>}
+            {winner && <Button sx={styles} variant="contained" startIcon={<RefreshCw />} onClick={resetGame}>
             New Game
             </Button>}
         </DivGridTwoCol>
-        </dialog>
+        </CustomDialog>
     );
 };
 export default WinnerDisplay;

@@ -29,7 +29,8 @@ const Dashboard = ({players, score, handlePlayers}:DashboardProps) => {
                     <Grid sx={{flexBasis: "fit-content"}} xs={12} >
                         <KeepScoresTable playerIcons={players} scores={score}/>
                     </Grid>
-                </Grid>
+                 
+                </Grid>    
         </Header>
     )
 };

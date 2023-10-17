@@ -17,10 +17,10 @@ const KeepScoresTable = ({playerIcons, scores}:KeepScoresProps) => {
     return(
     <div>
         <table>
-        <thead>
-          <tr>
-            <TableHeadLeft>{playerIcons[0]}</TableHeadLeft>
-            <TableHeadRight>{playerIcons[1]}</TableHeadRight>
+          <thead>
+            <tr>
+              <TableHeadLeft>{playerIcons[0]}</TableHeadLeft>
+              <TableHeadRight>{playerIcons[1]}</TableHeadRight>
             </tr>
           </thead>
           <tbody>
@@ -29,8 +29,8 @@ const KeepScoresTable = ({playerIcons, scores}:KeepScoresProps) => {
               <td>{scores.player2}</td>
             </TableRow>
           </tbody>
-  </table>
-    </div>
+        </table>
+      </div>
     );
 };
 
